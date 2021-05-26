@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+/**
+ # ------------------------------------------------------------------------
+ * HANDY FONT SIZER
+ # ------------------------------------------------------------------------
+ * @package      mod_handy_font_sizer
+ * @version      1.0
+ * @created      August 2015
+ * @author       Clutch Design
+ * @email        admin@clutchdesign.net
+ * @websites     http://clutchdesign.net
+ * @copyright    Copyright (C) 2015 Joomla Pro. All rights reserved.
+ * @license      GNU General Public License version 2, or later
+ # ------------------------------------------------------------------------
+**/
+
+.handyfontsizer-button {
+	font    : bold 18px arial;
+	padding : 3px;
+	border  : solid 1px #ccc;
+	cursor  : pointer;
+}
+
+.handyfontsizer-button:hover {
+	text-decoration : none;
+	background      : #333;
+	color           : #fff;
+	border          : solid 1px #333;
+}
+
+.handyfontsizer-disabled, .handyfontsizer-disabled:hover {
+	color      : #aaa;
+	border     : solid 1px #eee;
+	background : #eee;
+}

@@ -1,0 +1,241 @@
+
+#menu-button {
+	display:none;
+	/* background: #3193c0; */
+	/* style it as you like... */
+}
+/* .sm{
+	position:relative;
+	z-index:999;
+} */
+.sm-simple{
+	/* 	width:960px;
+	display:table; */
+}
+
+.sm-simple li {
+	display:inline-block;
+	float:left;
+	/* padding-left:30px; */
+	/* border: 1px solid #bbbbbb; */
+	/* background: white; */
+}
+
+
+.sm-simple> li >a {	
+	border-top:3px solid transparent;
+	text-align:center;
+}
+.sm-simple li:hover ul{
+	left:0px;
+	right:auto;
+	visibility:visible;
+	display:block;
+}
+
+.sm-simple ul li >a{		
+	width:100%;
+	color:white;
+	margin:0;
+}
+/* .sm-simple ul .jsn-menu-pull-down li >a, , .sm-simple  ul .jsn-menu-pull-down li >a:hover, .sm-simple ul .jsn-menu-pull-down li >a:focus, .sm-simple ul .jsn-menu-pull-down li >a:active {
+	padding:0px 54px;
+} */
+.sm-simple >li:hover>a, .sm-simple >li:active>a{
+	color:#3498db;
+	border-top:3px solid #3498db;
+}
+
+.sm-simple ul li:hover, .sm-simple ul li:active, .sm-simple ul li:focus, .sm-simple ul li a:hover, .sm-simple ul li a:focus{
+	color:#3498db;
+}
+
+.sm-simple ul{
+	background:#535454;
+	width:100%;
+	position:absolute;
+	top:55px;
+	left:0px;
+	/* -webkit-box-shadow:2px 2px 2px 1px; */
+	/* -moz-box-shadow: 2px 2px 2px 1px; */
+	/* box-shadow:2px 2px 2px 1px; */
+}
+/* .sm-simple >li:last-child{
+	display:inline-block;
+	padding:0px;
+} */
+
+.sm-simple  >li.first >a, .sm-simple  >li.first >a:hover, .sm-simple  >li.first >a:focus, .sm-simple  >li.first >a:active{
+	padding:20px 15px 20px 15px;
+}
+@media only screen and (device-width: 768px) and (orientation:landscape) {
+	/* For general iPad layouts */
+	.sm-simple  >li.first >a, .sm-simple  >li.first >a:hover, .sm-simple  >li.first >a:focus, .sm-simple  >li.first >a:active{
+		padding:20px 54px;
+		
+	}	
+}
+@media only screen and (device-width: 768px) and (orientation:portrait) {
+	/* For general iPad layouts */
+	.sm-simple  >li.first >a, .sm-simple  >li.first >a:hover, .sm-simple  >li.first >a:focus, .sm-simple  >li.first >a:active{
+		padding:20px 15px 20px 20px;
+		
+	}	
+}
+
+.sm-simple >li.last >a,  .sm-simple  >li.last >a:hover,  .sm-simple  >li.last >a:focus,  .sm-simple  >li.last >a:active{
+	padding: 20px 15px 20px 15px;
+}
+.sm-simple  li >a, .sm-simple  li >a:hover, .sm-simple li >a:focus, .sm-simple li >a:active {
+	padding: 20px 54px; 
+	/* width:100%; */
+	/* make room for the toggle button (sub indicator) */
+	/* padding-right: 58px; */
+	color: #333;
+	/* font-family: "Lucida Sans Unicode", "Lucida Sans", "Lucida Grande", Arial, sans-serif; */
+	/* font-size: 16px; */
+	/* font-weight: normal; */
+	line-height: 17px;
+	text-decoration: none;
+}
+
+.sm-simple a.disabled {
+	color: #cccccc;
+}
+
+.sm-simple li {
+	/* border-top: 1px solid rgba(0, 0, 0, 0.05); */
+}
+.sm-simple > li:first-child {
+	border-top: 0;
+}
+.sm-simple ul {
+	/* background: rgba(179, 179, 179, 0.1); */
+}
+.sm-simple ul a, .sm-simple ul a:hover, .sm-simple ul a:focus, .sm-simple ul a:active {
+	font-size: 15px;
+	/* border-left: 8px solid transparent; */
+}
+.sm-simple ul ul a,
+.sm-simple ul ul a:hover,
+.sm-simple ul ul a:focus,
+.sm-simple ul ul a:active {
+	border-left: 16px solid transparent;
+}
+.sm-simple ul ul ul a,
+.sm-simple ul ul ul a:hover,
+.sm-simple ul ul ul a:focus,
+.sm-simple ul ul ul a:active {
+	border-left: 24px solid transparent;
+}
+.sm-simple ul ul ul ul a,
+.sm-simple ul ul ul ul a:hover,
+.sm-simple ul ul ul ul a:focus,
+.sm-simple ul ul ul ul a:active {
+	border-left: 32px solid transparent;
+}
+.sm-simple ul ul ul ul ul a,
+.sm-simple ul ul ul ul ul a:hover,
+.sm-simple ul ul ul ul ul a:focus,
+.sm-simple ul ul ul ul ul a:active {
+	border-left: 40px solid transparent;
+}
+
+
+
+@media (max-width: 960px) {
+	/* Switch to desktop layout
+		-----------------------------------------------
+		These transform the menu tree from
+		collapsible to desktop (navbar + dropdowns)
+	-----------------------------------------------*/
+	/* start... (it's not recommended editing these rules) */
+	
+    #menu-button {
+		display:inline-block;
+	}
+	/* hide the menu when it has the "collapsed" class set by the script */
+	#main-menu.collapsed {
+		display:none;
+	}
+	.sm-simple{
+		width:100%;
+		height:100%;
+		position:absolute;
+	}
+	
+	.sm-simple ul{
+		width:auto;
+		position:static;
+		text-align:left;
+		
+	}
+	.sm-simple ul li{
+		background:#535454;
+	}
+	
+	.sm-simple li{
+		display:block;
+		float:none;
+	}
+	.sm-simple >li >a{		
+		width:100%;
+		background:#333;
+		color:#ddd;
+		margin:0;
+		text-align:left;
+		padding-left:32px;
+		
+	}
+	.sm-simple a.has-submenu span.sub-arrow:before {
+		display: inline-block;
+		content: '+';
+	}
+	.sm-simple a.has-submenu.highlighted span.sub-arrow:before {
+		display: inline-block;
+		content: '-';
+	}
+	
+	
+	.sm-simple a span.sub-arrow {
+		position: absolute;
+		/* top: 50%; */
+		margin-top: -7px;
+		left: auto;
+		right: 4px;
+		width: 34px;
+		height: 34px;
+		overflow: hidden;
+		font: bold 14px/34px monospace !important;
+		text-align: center;
+		text-shadow: none;
+		background: rgba(0, 0, 0, 0.08);
+	}
+	.sm-simple >li a:last-child, .sm-simple >li a:last-child:hover, .sm-simple >li a:focus, .sm-simple >li a:active{
+		padding: 13px 20px;
+	}
+	.sm-simple >li a, .sm-simple >li a:hover, .sm-simple >li a:focus, .sm-simple >li a:active{
+		color:#ddd;
+		padding: 13px 20px;
+		line-height: 17px;
+		text-decoration: none;
+	}
+	
+	.jsn-menu-pull-down{
+		width:100% !important;
+		/* position:absolute; */
+	}
+	
+	#jsn-menu .jsn-menu-toggle{
+		display:block;
+	}
+	
+	.sm-simple >li:hover>a, .sm-simple >li:active>a{
+		border-top:3px solid transparent;
+	}
+	
+	.sm-simple ul a, .sm-simple ul a:hover, .sm-simple ul a:focus, .sm-simple ul a:active {
+		font-size: 14px;
+		border-left: 8px solid transparent;
+	}
+}

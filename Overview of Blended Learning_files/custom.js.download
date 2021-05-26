@@ -1,0 +1,467 @@
+jQuery.noConflict();
+jQuery(document).ready(function(){
+
+	//bootstrap manually collapse because of upgrade to Joomla 3.7.5
+    if(window.location.hash != "") {
+      jQuery('a[href="' + window.location.hash + '"]').click()
+  	}
+
+	jQuery(document).on('click','.panel-group a',function(e) {
+		if( jQuery(e.target).is('a') && jQuery(e.target).attr('class') != 'arrowdown' ) {
+			jQuery(this).parent().parent().next(".panel-collapse").collapse('hide');
+		}
+	});
+	
+    
+    //Maintenance page
+    jQuery(document).on('click','.maintenance-table tr',function() {
+    	if( jQuery(this).attr("class")!= "accordion-toggle arrowdown" ) {
+           jQuery(this).addClass("arrowdown");
+           jQuery(this).next("tr").find(".accordian-body").collapse('show');
+        	jQuery(this).find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
+			
+        }else{
+         	jQuery(this).removeClass("arrowdown");
+        	jQuery(this).next("tr").find(".accordian-body").collapse('hide');
+        	jQuery(this).find(".fa-minus-square").removeClass("fa-minus-square").addClass("fa-plus-square");
+        }
+	});
+    
+	
+    
+    
+    
+    
+	
+	// --------------------------------------------------- collapse the tab when user press ctrl+f
+    window.addEventListener("keydown",function (e) {
+        if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) { 
+			jQuery('.panel-collapse:not(".in")').collapse('show');
+			
+		}
+        if(e.keyCode === 27) {
+			jQuery('.panel-collapse.in').collapse('hide');
+		}
+	});
+
+	
+	
+	// ---------------------------------------------------  handle facebook sharing button
+	jQuery( "#fbsharing" ).click(function() {
+		window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.hostname+"/elearning"), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=800,width=600');
+        return false; 
+	});
+    
+    // ---------------------------------------------------  handle twitter sharing button
+    jQuery( "#tweetsharing" ).click(function() {
+		window.open("https://twitter.com/share?url="+escape(window.location.hostname+"/elearning"), '',
+		'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=800,width=600');
+		return false; 
+	});
+    // ---------------------------------------------------  handle google+ sharing button
+    jQuery( "#googlesharing" ).click(function() {
+		window.open("https://plus.google.com/share?url="+escape(window.location.hostname+"/elearning"), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=800,width=600');
+		return false; 
+	});
+    
+	// --------------------------------------------------- draggable menu icon 
+	jQuery(".draggable").draggable();
+    
+	
+	// ---------------------------------------------------the actions when user scroll and click the back-to-top
+	jQuery(window).scroll(function () {
+		if (jQuery(this).scrollTop() > 100) {
+			jQuery('#back-top').fadeIn();
+			} else {
+			jQuery('#back-top').fadeOut();
+		}
+	});
+	
+	jQuery('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        jQuery('html,body').animate({
+            scrollTop: 0
+		}, 700);
+	});
+	
+	
+	// --------------------------------------------------- faq filter
+	var $filterSelect = jQuery('#FilterSelect'),
+	$sortSelect = jQuery('#SortSelect'),
+	$container = jQuery('#Container');
+	
+	$container.mixItUp();
+	
+	$filterSelect.on('change', function(){
+		$container.mixItUp('filter', this.value);
+	});
+	
+	$sortSelect.on('change', function(){
+		$container.mixItUp('sort', this.value);
+	});
+	
+	// --------------------------------------------------- faq collapsed direct link
+	var url = document.location.toString();
+	if ( url.match('#') ) {
+		
+		var anchor = window.location.hash.replace("#", "");
+		jQuery("#" + anchor).collapse('show');
+		var element = jQuery("#" + anchor).offset();
+		jQuery("#"+anchor).prev().find( ".panel-title a" ).addClass('arrowdown');
+		jQuery('html, body').animate({ scrollTop: element.top-5 }, 500);
+		
+		
+		
+	}
+    //  --------------------------------------------------- auto scroll to the page top when user click the tab
+    jQuery(".panel-title a").click(function(e){
+		e.preventDefault();
+		$(e.target).toggleClass("arrowdown");
+		jQuery('html, body').animate({
+			scrollTop: jQuery(e.target).offset().top-5
+		}, 500);
+	})
+	
+	// --------------------------------------------------- page transition
+	jQuery(".animsition").animsition({
+		inClass: 'zoom-in-sm',
+		outClass: 'zoom-out-sm',
+		inDuration: 800,
+		outDuration: 300,
+		linkElement: '.animsition-link',
+		// e.g. linkElement: 'a:not([target="_blank"]):not([href^=#])'
+		loading: true,
+        loadingInner: '', // e.g '<img src="loading.svg" />'
+		loadingParentElement: 'body', //animsition wrapper element
+		loadingClass: 'animsition-loading',
+		unSupportCss: [
+			'animation-duration',
+			'-webkit-animation-duration',
+			'-o-animation-duration'
+		],
+		//"unSupportCss" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+		//The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+		overlay : false,
+		overlayClass : 'animsition-overlay-slide',
+		overlayParentElement : 'body'
+	});	
+	
+	
+	
+	
+	// --------------------------------------------------- lazy loading for the youtube video
+	jQuery('.js-lazyYT').lazyYT({
+		
+	});
+	
+	
+	//create the scroll menu
+	/* 	jQuery('.scroll-menu').scrollNav({
+		sections: '.panel-group-heading',
+		subSections: false,
+		sectionElem: 'section',
+		showHeadline: false,
+		headlineText: 'Scroll To',
+		showTopLink: false,
+		topLinkText: 'Top',
+		fixedMargin: 40,
+		scrollOffset: 40,
+		animated: true,
+		speed: 500,
+		// insertTarget: this.selector,
+		// insertTarget: "#jsn-pos-stick-leftmiddle .jsn-modulecontainer",
+		insertTarget: "#jsn-pos-right",
+		insertLocation: 'insertBefore',
+		arrowKeys: false,
+		scrollToHash: true,
+		onInit: null,
+		onRender: null,
+		onDestroy: null
+	}); */
+	
+	
+	window.addEvent('domready',function() {    
+		Element.prototype.hide = function() {
+			jQuery(function () { 
+				jQuery('#myTab li:eq(1) a').tab('show');
+			});    
+		};
+	});
+	
+	// --------------------------------------------------- accessible main menu 
+	jQuery('.sm-simple ').smartmenus({
+		subMenusMinWidth:	'100%',	
+		subMenusMaxWidth:	'100%',		// max-width for the sub menus (any CSS unit) - if set, the fixed width set in CSS will be ignored
+		subIndicators: 		true,	
+		markCurrentTree:false,
+		showTimeout:		0,		// timeout before showing the sub menus
+		hideTimeout:		0,
+	});	
+	// ---------------------------------------------------  behave like accordion in collapsible mode
+	jQuery('#main-menu').bind('click.smapi', function(e, item) {
+		var obj = jQuery(this).data('smartmenus');
+		if (obj.isCollapsible()) {
+			var $item = jQuery(item),
+			$sub = $item.dataSM('sub');
+			if ($sub && !$sub.is(':visible')) {
+				obj.itemActivate($item, true);
+				return false;
+			}
+		}
+	});
+	
+	jQuery('#menu-button').click(function() {
+		var $this = $(this),
+		$menu = jQuery('#main-menu');
+		if ($menu.is(':animated')) {
+			return false;
+		}
+		if (!$this.hasClass('collapsed')) {
+			$menu.slideUp(250, function() { jQuery(this).addClass('collapsed').css('display', ''); });
+			$this.addClass('collapsed');
+			} else {
+			$menu.slideDown(250, function() { jQuery(this).removeClass('collapsed'); });
+			$this.removeClass('collapsed');
+		}
+		return false;
+	});
+	
+	
+	
+	// --------------------------------------------------- 3 level menu in the submenu i.e service menu
+	function init() {		
+		[].slice.call( document.querySelectorAll( '.dr-menu' ) ).forEach( function( el, i ) {
+			
+			var trigger = el.querySelector( 'div.dr-trigger' ),
+			icon = trigger.querySelector( 'span.dr-icon-menu' ),
+			//except= el.querySelector('#jsn-master'),
+			open = false;
+			jQuery(".dr-menu .menu").css("display","none");
+			if (window.matchMedia('(min-width: 960px)').matches) {
+				jQuery(".dr-label,.dr-icon-menu").removeClass("pull-right");
+			}
+			
+			function unbindClickOutsideTrigger() {
+				jQuery(document).off("mouseup.alloptions");
+			}
+			function bindClickOutsideTrigger() {
+				jQuery(document).on('mouseup.alloptions',function (e){
+					var container = jQuery(".dr-trigger");
+					if (!container.is(e.target) // if the target of the click isn't the container...
+					&& container.has(e.target).length === 0) // ... nor a descendant of the container
+					{
+						hideAllOptions();
+						unbindClickOutsideTrigger();
+					}
+				});
+			}
+			function expandAllOptions() {
+				el.className += ' dr-menu-open';
+				jQuery(".dr-menu .menu").css("display","block");
+				if (window.matchMedia('(min-width: 960px)').matches) {
+					jQuery(".jsn-hasmainbody").width(jQuery(".jsn-hasmainbody").width()-jQuery(".dr-menu .menu").width()-50);
+				}
+				
+				open = true;
+			}
+			function hideAllOptions() {
+				unbindClickOutsideTrigger();
+				event.stopPropagation();
+				open = false;
+				jQuery(".dr-menu .menu").css("display","none");
+				if (window.matchMedia('(min-width: 960px)').matches) {
+					jQuery(".jsn-hasmainbody").width('100%');
+				}
+				el.className = el.className.replace(/\bdr-menu-open\b/,'');
+				return false;
+			}
+			trigger.addEventListener( 'click', function( event ) {
+				if( !open ) {
+					expandAllOptions();
+					bindClickOutsideTrigger();
+				}
+				else{
+					hideAllOptions();
+					unbindClickOutsideTrigger();
+				}
+
+				
+			}, false );
+
+		});
+	}
+	init();
+	
+	
+	// ---------------------------------------------------  submenu with slider effect for the mobile version
+	if (window.matchMedia('(min-width: 992px)').matches) {
+		
+		//desktop version
+		jQuery('.side-menu').sidr({
+			'side':"left",
+			'speed':'100',
+			// 'menuWidth':'200',
+			'body':'jsn-pos-innerright',
+			'timing':'ease-in-out'
+		});
+		} else {	
+		//mobile version
+		jQuery('.side-menu').sidr({
+			'side':"right",
+			'speed':'500',
+		});
+		
+	}
+	
+	
+	
+	jQuery("body").on("click",function(e) {
+		jQuery.sidr('close','sidr');
+	});
+	
+	// jQuery("#cal_event").click(function() {
+	// jQuery('.fancybox-media').fancybox({
+	// 'width'             : '800',
+	// 'height'            : '600',
+	// 'transitionIn'      : 'none',
+	// 'transitionOut'     : 'none',
+	// 'type'              : 'iframe'
+	
+	// });	
+	
+	// jQuery(".lightbox").fancybox({
+	// maxWidth	: 800,
+	// maxHeight	: 600,
+	// fitToView	: false,
+	// width		: '70%',
+	// height		: '70%',
+	// autoSize	: false,
+	// closeClick	: false,
+	// openEffect	: 'none',
+	// closeEffect	: 'none',
+	// type     : 'iframe'
+	// });
+	// });
+	/*
+		jQuery('body').swipe( {
+		//Single swipe handler for left swipes
+		swipeLeft: function () {
+		jQuery.sidr('close', 'sidr');
+		},
+		swipeRight: function () {
+		jQuery.sidr('open', 'sidr');
+		},
+		//Default is 75px, set to 0 for demo so any distance triggers swipe
+		threshold: 45
+		});
+		
+	*/	
+	
+	
+	
+ 	// --------------------------------------------------- google form submit
+	jQuery(".googleform  input[type=submit]").click(function(e){
+		e.preventDefault();
+		
+		
+		var filled=[];
+		jQuery( '.googleform' ).find( 'input[type=text]' ).each(function(){
+			if( ! jQuery( this ).prop( 'required' )){
+				
+				//console.log("not required")
+			}
+			else {
+				// console.log("required");
+				if(jQuery(this).val()=="")
+				{
+					//console.log(jQuery(this).val()+"filled");
+					filled.push("false");
+				}
+				else{
+					filled.push("true");
+				}
+				
+				
+				
+			}
+		});
+		
+		
+		jQuery( '.googleform' ).find( "input[name^='entry'].ss-q-checkbox,input[name^='entry'].ss-q-radio" ).each(function(){
+			
+			if(jQuery( "input[name='"+jQuery(this).attr('name')+"']:checked").length>0){
+				filled.push("true");
+			}
+			else{
+				filled.push("false");
+			}
+			
+		});
+		// console.log(filled);
+		if(filled.contains("false")){
+			bootbox.alert({
+				message:"<div class='alert'>Please answer all the required questions!</div>",
+				backdrop:true
+			});
+		}
+		//else if(grecaptcha.getResponse() == ""){
+		//	bootbox.alert({
+		//		message:"<div class='alert'>Please check the reCaptcha Box!</div>",
+		//		backdrop:true
+		//	});
+	//}
+	else{
+		jQuery.ajax({
+			type:"POST",
+			url:jQuery(this).closest("form").attr("action"),
+			data:jQuery(this).closest("form").serialize(),
+			dataType: "xml",
+			statusCode: {
+				//success submission
+				0: function() {
+					jQuery(".googleform")[0].reset();
+					//grecaptcha.reset();
+					bootbox.alert({
+						message:"<div class='alert alert-success'>Your information is submitted</div>",
+						backdrop:true
+					});
+				},
+				
+			}
+			
+		});
+	}
+	
+});
+
+
+
+// --------------------------------------------------- custom scroll bar
+jQuery(".system-announcements+.content, .known-issues+.content, .tools-tips+.content, .ext-item").mCustomScrollbar({
+	theme:"dark-3",
+});
+
+
+// --------------------------------------------------- timeline
+var timelineAnimate;
+timelineAnimate = function(elem) {
+	return jQuery(".timeline.animated .timeline-row").each(function(i) {
+		var bottom_of_object, bottom_of_window;
+		bottom_of_object = jQuery(this).position().top + jQuery(this).outerHeight();
+		bottom_of_window = jQuery(window).scrollTop() + jQuery(window).height();
+		if (bottom_of_window > bottom_of_object) {
+			return $(this).addClass("active");
+		}
+	});
+};
+timelineAnimate();
+return jQuery(window).scroll(function() {
+	return timelineAnimate();
+});
+
+
+//----------------------------------------------------- image map
+jQuery('map').imageMapResize();
+
+});
+
